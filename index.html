@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,67 +7,55 @@
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background: #eef2f7;
-    margin: 0;
+    font-family: Arial;
+    background:#eef2f7;
+    margin:0;
 }
-
 .container{
-    width: 400px;
-    background: #ffffff;
-    margin: 80px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width:420px;
+    background:white;
+    margin:60px auto;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
-
-h2{
-    text-align: center;
-    margin-bottom: 20px;
+h2{text-align:center;}
+.note{
+    font-size:12px;
+    color:gray;
+    margin-bottom:10px;
 }
-
-input, select{
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+input,select{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
 }
-
 button{
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 6px;
-    background: linear-gradient(to right, #2563eb, #1e3a8a);
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:linear-gradient(to right,#2563eb,#1e3a8a);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
 }
-
-button:hover{
-    opacity: 0.9;
-}
-
 .error{
-    color: red;
-    font-size: 13px;
-    margin-top: 5px;
+    color:red;
+    font-size:13px;
 }
-
 .success{
-    text-align: center;
-    font-size: 18px;
-    margin-top: 10px;
+    text-align:center;
+    font-size:18px;
+    margin-top:10px;
 }
-
 #countdown{
-    font-size: 22px;
-    color: #1e3a8a;
-    text-align: center;
-    margin-top: 10px;
+    font-size:22px;
+    color:#1e3a8a;
+    text-align:center;
+    margin-top:10px;
 }
 </style>
 </head>
@@ -75,98 +63,113 @@ button:hover{
 <body>
 
 <div class="container" id="formBox">
-    <h2>Secure Application Portal</h2>
+<h2>Secure Application Portal</h2>
+<div class="note">Practice Form – Sample Format Only</div>
 
-    <input type="text" id="pan" placeholder="PAN Number (ABCDE1234F)">
-    <input type="text" id="aadhaar" placeholder="Aadhaar Number (12 digits)">
-    <input type="text" id="bank" placeholder="Bank Account Number">
-    <input type="text" id="ifsc" placeholder="IFSC Code (SBIN0001234)">
+<input type="text" id="pan" placeholder="PAN Format (ABCDE1234F)">
+<input type="text" id="aadhaar" placeholder="Aadhaar Format (12 digits)">
+<input type="text" id="bank" placeholder="Bank Account (min 9 digits)">
+<input type="text" id="ifsc" placeholder="IFSC Format (SBIN0001234)">
 
-    <select id="amount">
-        <option value="">Select Amount</option>
-        <option>1 - 1.5 L</option>
-        <option>2 - 2.5 L</option>
-        <option>3 - 3.5 L</option>
-        <option>4 - 4.5 L</option>
-        <option>5 - 5.5 L</option>
-        <option>6 L</option>
-    </select>
+<select id="amount">
+<option value="">Select Amount</option>
+<option>1 - 1.5 L</option>
+<option>2 - 2.5 L</option>
+<option>3 - 3.5 L</option>
+<option>4 - 4.5 L</option>
+<option>5 - 5.5 L</option>
+<option>6 L</option>
+</select>
 
-    <div class="error" id="errorMsg"></div>
+<select id="business">
+<option value="">Propose Business</option>
+<option>Tea Stall</option>
+<option>Cab</option>
+<option>Real Estate</option>
+<option>Other Business</option>
+</select>
 
-    <button onclick="validateForm()">Submit</button>
+<div class="error" id="errorMsg"></div>
+
+<button onclick="validateForm()">Submit</button>
 </div>
 
 <div class="container" id="successBox" style="display:none;">
-    <div class="success">Request Received ✅</div>
-    <div id="countdown">05:00</div>
+<div class="success">Request Received ✅</div>
+<div id="countdown">05:00</div>
 </div>
 
 <script>
 function validateForm(){
 
-    let pan=document.getElementById("pan").value.trim();
-    let aadhaar=document.getElementById("aadhaar").value.trim();
-    let bank=document.getElementById("bank").value.trim();
-    let ifsc=document.getElementById("ifsc").value.trim();
-    let amount=document.getElementById("amount").value;
-    let error=document.getElementById("errorMsg");
+let pan=document.getElementById("pan").value.trim();
+let aadhaar=document.getElementById("aadhaar").value.trim();
+let bank=document.getElementById("bank").value.trim();
+let ifsc=document.getElementById("ifsc").value.trim();
+let amount=document.getElementById("amount").value;
+let business=document.getElementById("business").value;
+let error=document.getElementById("errorMsg");
 
-    let panPattern=/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    let aadhaarPattern=/^[0-9]{12}$/;
-    let ifscPattern=/^[A-Z]{4}0[A-Z0-9]{6}$/;
+let panPattern=/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+let aadhaarPattern=/^[0-9]{12}$/;
+let ifscPattern=/^[A-Z]{4}0[A-Z0-9]{6}$/;
 
-    if(!panPattern.test(pan)){
-        error.innerText="Incorrect PAN Format";
-        return;
-    }
+if(!panPattern.test(pan)){
+error.innerText="Incorrect PAN Format";
+return;
+}
 
-    if(!aadhaarPattern.test(aadhaar)){
-        error.innerText="Incorrect Aadhaar Format";
-        return;
-    }
+if(!aadhaarPattern.test(aadhaar)){
+error.innerText="Incorrect Aadhaar Format";
+return;
+}
 
-    if(bank.length < 9){
-        error.innerText="Incorrect Bank Account Number";
-        return;
-    }
+if(bank.length<9){
+error.innerText="Incorrect Bank Account Number";
+return;
+}
 
-    if(!ifscPattern.test(ifsc)){
-        error.innerText="Incorrect IFSC Format";
-        return;
-    }
+if(!ifscPattern.test(ifsc)){
+error.innerText="Incorrect IFSC Format";
+return;
+}
 
-    if(amount===""){
-        error.innerText="Please Select Amount";
-        return;
-    }
+if(amount===""){
+error.innerText="Please Select Amount";
+return;
+}
 
-    error.innerText="";
-    document.getElementById("formBox").style.display="none";
-    document.getElementById("successBox").style.display="block";
+if(business===""){
+error.innerText="Please Select Business Type";
+return;
+}
 
-    startCountdown();
+error.innerText="";
+document.getElementById("formBox").style.display="none";
+document.getElementById("successBox").style.display="block";
+
+startCountdown();
 }
 
 function startCountdown(){
-    let time=300;
-    let display=document.getElementById("countdown");
+let time=300;
+let display=document.getElementById("countdown");
 
-    let timer=setInterval(function(){
-        let minutes=Math.floor(time/60);
-        let seconds=time%60;
+let timer=setInterval(function(){
+let minutes=Math.floor(time/60);
+let seconds=time%60;
 
-        display.innerHTML=
-        (minutes<10?"0":"")+minutes+":"+
-        (seconds<10?"0":"")+seconds;
+display.innerHTML=
+(minutes<10?"0":"")+minutes+":"+
+(seconds<10?"0":"")+seconds;
 
-        time--;
+time--;
 
-        if(time<0){
-            clearInterval(timer);
-            display.innerHTML="Processing Complete";
-        }
-    },1000);
+if(time<0){
+clearInterval(timer);
+display.innerHTML="Processing Complete";
+}
+},1000);
 }
 </script>
 
