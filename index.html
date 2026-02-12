@@ -16,9 +16,7 @@ body{
   border-radius:12px;
   box-shadow:0 0 20px rgba(0,0,0,0.15);
 }
-h1{
-  margin-bottom:5px;
-}
+h1{ margin-bottom:5px; }
 .brand{
   font-size:14px;
   color:gray;
@@ -39,9 +37,8 @@ button{
   font-size:16px;
   cursor:pointer;
 }
-button:hover{
-  background:#084298;
-}
+button:hover{ background:#084298; }
+
 .progress-container{
   width:100%;
   background:#ddd;
@@ -57,16 +54,67 @@ button:hover{
   color:white;
   font-size:12px;
 }
+
 #status{
   margin-top:10px;
   font-weight:bold;
 }
+.error{ color:red; }
 .success{ color:green; }
 .processing{ color:#0a58ca; }
 </style>
 
 <script>
+function validatePAN(pan){
+  return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan);
+}
+
+function validateAadhaar(aadhaar){
+  return /^[0-9]{12}$/.test(aadhaar);
+}
+
+function validateIFSC(ifsc){
+  return /^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc);
+}
+
 function submitForm(){
+
+  let pan = document.getElementById("pan").value.toUpperCase();
+  let aadhaar = document.getElementById("aadhaar").value;
+  let bank = document.getElementById("bank").value;
+  let ifsc = document.getElementById("ifsc").value.toUpperCase();
+
+  let status = document.getElementById("status");
+
+  if(!validatePAN(pan)){
+    status.className="error";
+    status.innerHTML="Incorrect PAN Number";
+    return;
+  }
+
+  if(!validateAadhaar(aadhaar)){
+    status.className="error";
+    status.innerHTML="Incorrect Aadhaar Number";
+    return;
+  }
+
+  if(bank.length < 9){
+    status.className="error";
+    status.innerHTML="Incorrect Bank Account Number";
+    return;
+  }
+
+  if(!validateIFSC(ifsc)){
+    status.className="error";
+    status.innerHTML="Incorrect IFSC Code";
+    return;
+  }
+
+  // If all valid → start processing
+  startProgress();
+}
+
+function startProgress(){
   let progress = 0;
   let bar = document.getElementById("bar");
   let container = document.getElementById("progressContainer");
@@ -88,7 +136,7 @@ function submitForm(){
       status.innerHTML="✔ Form Submitted<br>Status: Processing Complete";
       document.querySelector("button").disabled = false;
     }
-  },1200); // around 2 minutes total
+  },1000);
 }
 </script>
 
@@ -101,10 +149,10 @@ function submitForm(){
 <h1>USDTETF.01</h1>
 <div class="brand">Secure Application Portal</div>
 
-<input type="text" placeholder="PAN Number">
-<input type="text" placeholder="Aadhaar Number">
-<input type="text" placeholder="Bank Account Number">
-<input type="text" placeholder="IFSC Code">
+<input type="text" id="pan" placeholder="PAN Number (ABCDE1234F)">
+<input type="text" id="aadhaar" placeholder="Aadhaar Number (12 digits)">
+<input type="text" id="bank" placeholder="Bank Account Number">
+<input type="text" id="ifsc" placeholder="IFSC Code (SBIN0001234)">
 
 <select>
 <option>Select Purpose</option>
