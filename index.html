@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Loan Application</title>
-
+<title>Application Demo</title>
 <style>
-body {
-    font-family: Arial;
-    background-color: #f2f2f2;
-    text-align: center;
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+  text-align:center;
 }
-
-.container {
-    background: white;
-    padding: 25px;
-    margin: 60px auto;
-    width: 320px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.container{
+  background:white;
+  width:380px;
+  margin:60px auto;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
-
-h2 {
-    margin-bottom: 15px;
+input, select{
+  width:90%;
+  padding:10px;
+  margin:8px 0;
 }
-
-input {
-    width: 92%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+button{
+  width:95%;
+  padding:12px;
+  background:#007bff;
+  color:white;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
 }
-
-button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background: #e60000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
+button:hover{
+  background:#0056b3;
 }
-
-button:hover {
-    background: #cc0000;
+#loading{
+  display:none;
+  color:red;
+  font-weight:bold;
+  margin-top:10px;
 }
 </style>
 
 <script>
-function submitForm() {
+function submitForm(){
+  document.getElementById("loading").style.display="block";
+  setTimeout(function(){
     alert("Server Error! Please try again later.");
+    document.getElementById("loading").style.display="none";
+  },10000);
 }
 </script>
 
@@ -59,19 +56,34 @@ function submitForm() {
 <body>
 
 <div class="container">
-<h2>Loan Application Form</h2>
-<select>
-  <option>Select Loan Type</option>
-  <option>🚗 Cab Loan</option>
-  <option>🛍️ Retail Loan</option>
-  <option>💼 Business Loan</option>
-</select><br><br><input type="text" placeholder="Full Name"><br>
-<input type="text" placeholder="PAN Number"><br>
-<input type="text" placeholder="Aadhaar Number"><br>
-<input type="text" placeholder="Bank Account Number"><br>
-<input type="number" placeholder="Loan Amount"><br>
 
-<button onclick="submitForm()">Submit Application</button>
+<h2>Application Form (Demo)</h2>
+
+<input type="text" placeholder="Demo PAN Number">
+<input type="text" placeholder="Demo Aadhaar Number">
+<input type="text" placeholder="Demo Bank Account Number">
+<input type="text" placeholder="Demo IFSC Code">
+
+<select>
+<option>Select Proposal</option>
+<option>Cab</option>
+<option>Tea Stall</option>
+<option>Other Branch</option>
+</select>
+
+<select>
+<option>Select Amount</option>
+<option>₹1,00,000</option>
+<option>₹2,00,000</option>
+<option>₹3,00,000</option>
+<option>₹4,00,000</option>
+<option>₹5,00,000</option>
+<option>₹6,00,000</option>
+</select>
+
+<button onclick="submitForm()">Submit</button>
+
+<p id="loading">Processing... Please wait 10 seconds</p>
 
 </div>
 
